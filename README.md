@@ -1,5 +1,7 @@
 # Orthogonal CLI
 
+Here is the Orthogonal CLI for the DataCrunch competition by [CrunchDAO](https://www.crunchdao.com/).
+
 ## Installation
 
 Use [pip](https://pypi.org/project/orthogonal-cli/) to install the `orthogonal-cli`.
@@ -37,6 +39,8 @@ print(dataframe.head())
 # 3  2023-01-06  DDDDDDD -1.311531
 # 4  2023-01-06  EEEEEEE  0.917134
 ```
+
+Please see [here](https://github.com/crunchdao/orthogonal/blob/master/api/service/orthogonalize.py) for the backend implementation.
 
 ## Contributing
 
