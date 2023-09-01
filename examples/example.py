@@ -6,7 +6,8 @@ dotenv.load_dotenv()
 
 client = orthogonal.Client()
 
-y = pandas.read_csv("y_2.csv")
-dataframe = client.orthogonalize(y)
+y = pandas.read_csv("y.csv", index_col=0)
+print(y.head())
 
-print(dataframe)
+dataframe = client.orthogonalize(y)
+print(dataframe.head())
