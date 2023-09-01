@@ -13,6 +13,8 @@ pip install orthogonal-cli --upgrade
 This library require a [CrunchDAO's API Key](https://account.crunchdao.com/account/api).
 
 ```python
+import orthogonal
+
 client = orthogonal.Client(
     api_key="..." # can also be read from CRUNCHDAO_API_KEY environment variable.
 )
