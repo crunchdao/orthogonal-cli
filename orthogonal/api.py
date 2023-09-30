@@ -44,7 +44,7 @@ class Client:
         self,
         y: pandas.DataFrame,
         date_column_name: str = "Moons",
-        alpha = 1
+        alpha=1
     ):
         response = self.session.post(
             self.api_base_url + "/orthogonalize",
