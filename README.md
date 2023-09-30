@@ -30,7 +30,7 @@ print(y.head())
 # 1030374      1  DDDDDDD -1.276682
 # 1030375      1  EEEEEEE  0.939289
 
-dataframe = client.orthogonalize(y)
+dataframe, jacobians = client.orthogonalize(y)
 print(dataframe.head())
 #    Moons       id      abcd
 # 0      1  AAAAAAA -2.149988
