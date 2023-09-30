@@ -1,6 +1,5 @@
 import os
 import io
-import json
 
 import requests
 import pandas
@@ -45,7 +44,7 @@ class Client:
         self,
         y: pandas.DataFrame,
         date_column_name: str = "Moons",
-        risk_exposures=[0.36, 0.68, 0.76, 0.88]
+        alpha = 1
     ):
         response = self.session.post(
             self.api_base_url + "/orthogonalize",
@@ -54,7 +53,7 @@ class Client:
             },
             data={
                 "date_column_name": date_column_name,
-                "risk_exposures": json.dumps(risk_exposures),
+                "alpha": alpha,
             }
         )
 

@@ -12,6 +12,6 @@ print(y.head())
 dataframe = client.orthogonalize(
     y,
     date_column_name="date",
-    risk_exposures=[0.45, 0.86, 0.20, 0.42],
+    alpha=0.346,
 )
 print(dataframe.head())
