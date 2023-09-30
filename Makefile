@@ -8,7 +8,7 @@ install: init
 	$(PIP) install -e .
 
 uninstall:
-	$(PIP) uninstall crunch
+	$(PIP) uninstall orthogonal-cli
 
 build:
 	rm -rf build *.egg-info dist

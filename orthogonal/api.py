@@ -3,6 +3,7 @@ import io
 
 import requests
 import pandas
+import numpy
 
 from . import constants
 
@@ -43,7 +44,8 @@ class Client:
     def orthogonalize(
         self,
         y: pandas.DataFrame,
-        date_column_name: str = "Moons"
+        date_column_name: str = "Moons",
+        alpha=1
     ):
         response = self.session.post(
             self.api_base_url + "/orthogonalize",
@@ -51,12 +53,20 @@ class Client:
                 "file": io.StringIO(y.to_csv(index=False))
             },
             data={
-                "date_column_name": date_column_name
+                "date_column_name": date_column_name,
+                "alpha": alpha,
             }
         )
 
         if not response.ok:
             raise ValueError(f"failed to orthogonalize: {response.text}")
 
-        bytes = io.BytesIO(response.content)
-        return pandas.read_csv(bytes)
+        content = response.json()
+
+        dataframe = pandas.read_csv(io.StringIO(content["dataframe"]))
+        jacobians = [
+            numpy.array(x)
+            for x in content["jacobians"]
+        ]
+
+        return dataframe, jacobians
