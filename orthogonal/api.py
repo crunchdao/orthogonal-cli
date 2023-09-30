@@ -3,6 +3,7 @@ import io
 
 import requests
 import pandas
+import numpy
 
 from . import constants
 
@@ -60,5 +61,12 @@ class Client:
         if not response.ok:
             raise ValueError(f"failed to orthogonalize: {response.text}")
 
-        bytes = io.BytesIO(response.content)
-        return pandas.read_csv(bytes)
+        content = response.json()
+
+        dataframe = pandas.read_csv(io.StringIO(content["dataframe"]))
+        jacobians = [
+            numpy.array(x)
+            for x in content["jacobians"]
+        ]
+
+        return dataframe, jacobians

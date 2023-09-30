@@ -6,12 +6,15 @@ dotenv.load_dotenv()
 
 client = orthogonal.Client()
 
-y = pandas.read_csv("y.csv", index_col=0)
+y = pandas.read_csv("y.csv")
 print(y.head())
 
-dataframe = client.orthogonalize(
+dataframe, jacobians = client.orthogonalize(
     y,
-    date_column_name="date",
+    date_column_name="Moons",
     alpha=0.346,
 )
 print(dataframe.head())
+print(str(jacobians)[:100])
+
+# import pdb; pdb.set_trace()
