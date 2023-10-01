@@ -45,7 +45,8 @@ class Client:
         self,
         y: pandas.DataFrame,
         date_column_name: str = "Moons",
-        alpha=1
+        alpha=1,
+        compute_jacobians=False
     ):
         response = self.session.post(
             self.api_base_url + "/orthogonalize",
@@ -55,14 +56,17 @@ class Client:
             data={
                 "date_column_name": date_column_name,
                 "alpha": alpha,
+                "jacobians": "true" if compute_jacobians else "false",
             }
         )
 
         if not response.ok:
             raise ValueError(f"failed to orthogonalize: {response.text}")
 
-        content = response.json()
+        if not compute_jacobians:
+            return pandas.read_csv(io.BytesIO(response.content))
 
+        content = response.json()
         dataframe = pandas.read_csv(io.StringIO(content["dataframe"]))
         jacobians = [
             numpy.array(x)
